@@ -22,4 +22,11 @@ MapReduce合并了两种经典函数：
 
 经典图
 ---------
-![MapReduce](https://github.com/SunJackson/doc/blob/master/mapreduce/mapreduce.jpg "经典MapReduce配图")
+![MapReduce](./mapreduce.jpg "经典MapReduce配图")
+
+MapReduce模式
+-----------
+
+```
+MapReduce致力于解决大规模数据处理的问题，因此在设计之初就考虑了数据的局部性原理，利用局部性原理将整个问题分而治之。MapReduce集群由普通PC机构成，为无共享式架构。在处理之前，将数据集分布至各个节点。处理时，每个节点就近读取本地存储的数据处理（map），将处理后的数据进行合并（combine）、排序（shuffle and sort）后再分发（至reduce节点），避免了大量数据的传输，提高了处理效率。无共享式架构的另一个好处是配合复制（replication）策略，集群可以具有良好的容错性，一部分节点的down机对集群的正常工作不会造成影响。
+```

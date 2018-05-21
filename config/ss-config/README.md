@@ -2,10 +2,10 @@ shadowsocks 配置
 ===============
 `配置`
 ------
-```pip install shadowsocks, salsa20 -i https://pypi.douban.com/simple
+`pip install shadowsocks, salsa20 -i https://pypi.douban.com/simple
 sudo cp ./shadowsocks.service /etc/systemd/system/shadowsocks.service
 systemctl enable /etc/systemd/system/shadowsocks.service
-systemctl start /etc/systemd/system/shadowsocks.service```
+systemctl start /etc/systemd/system/shadowsocks.service`
 
 `manjaro config`
 --------------------

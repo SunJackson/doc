@@ -1,0 +1,10 @@
+yaourt fcitx
+vi /etc/environment
+sudo vi /etc/environment
+---------------
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+----------------
+source /etc/environment
+sudo pacman -S fcitx-configtool, fcitx-im, fcitx-libpinyin

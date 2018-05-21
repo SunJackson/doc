@@ -15,4 +15,4 @@ MapReduce合并了两种经典函数：
 2、化简（Reducing ）遍历集合中的元素来返回一个综合的结果。即，输出表单里一列数字的和这个任务属于reducing。
 ```
 ##经典图
-![MapReduce](https://github.com/SunJackson/doc/tree/master/mapreduce/mapreduce.jpg "经典MapReduce配图")
+![MapReduce](mapreduce.jpg "经典MapReduce配图")

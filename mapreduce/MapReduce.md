@@ -22,7 +22,7 @@ MapReduce合并了两种经典函数：
 
 经典图
 ---------
-![MapReduce](./mapreduce.jpg "经典MapReduce配图")
+![MapReduce](https://github.com/SunJackson/doc/blob/master/mapreduce/mapreduce.jpg "经典MapReduce配图")
 
 MapReduce模式
 -----------

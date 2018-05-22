@@ -11,3 +11,10 @@ git
 gcc
 cmake
 ```
+
+网易云音乐
+----------
+```
+netease-cloud-music
+```
+

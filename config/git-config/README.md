@@ -7,6 +7,6 @@ git操作
 `git rm -r --cached .`
 `git add .`
 
-[模板][https://github.com/github/gitignore]
+[ignore模板](https://github.com/github/gitignore)
 
 

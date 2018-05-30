@@ -49,13 +49,13 @@ for key in train_x.keys():
 ```
 ### 实例化 Estimator，指定特征列和各种超参数
 
->TensorFlow 提供了几个预创建的分类器 Estimator
+- TensorFlow 提供了几个预创建的分类器 Estimator
 
-> - tf.estimator.DNNClassifier：适用于执行多类别分类的深度模型。
+  - tf.estimator.DNNClassifier：适用于执行多类别分类的深度模型。
 
-> - tf.estimator.DNNLinearCombinedClassifier：适用于宽度和深度模型。
+  - tf.estimator.DNNLinearCombinedClassifier：适用于宽度和深度模型。
 
-> - tf.estimator.LinearClassifier：适用于基于线性模型的分类器。
+  - tf.estimator.LinearClassifier：适用于基于线性模型的分类器。
 
 ### 训练、评估和预测
 
@@ -87,22 +87,22 @@ classifier = tf.estimator.DNNClassifier(
 #### 默认检查点目录
 
 
->如果您未在 Estimator 的构造函数中指定 model_dir，则 Estimator 会将检查点文件写入由 Python 的 tempfile.mkdtemp 函数选择的临时目录
+- 如果您未在 Estimator 的构造函数中指定 model_dir，则 Estimator 会将检查点文件写入由 Python 的 tempfile.mkdtemp 函数选择的临时目录
 中
 
 
 #### 检查点频率
 
->默认情况下，Estimator 按照以下时间安排将检查点保存到 model_dir 中：
+- 默认情况下，Estimator 按照以下时间安排将检查点保存到 model_dir 中：
 
-- 每 10 分钟（600 秒）写入一个检查点。
-- 在 train 方法开始（第一次迭代）和完成（最后一次迭代）时写入一个检查点。
-- 只在目录中保留 5 个最近写入的检查点。
+  - 每 10 分钟（600 秒）写入一个检查点。
+  - 在 train 方法开始（第一次迭代）和完成（最后一次迭代）时写入一个检查点。
+  - 只在目录中保留 5 个最近写入的检查点。
 
->可以通过执行下列步骤来更改默认时间
+- 可以通过执行下列步骤来更改默认时间
 
-- 创建一个 RunConfig 对象来定义所需的时间安排。
-- 在实例化 Estimator 时，将该 RunConfig 对象传递给 Estimator 的 config 参数。
+  - 创建一个 RunConfig 对象来定义所需的时间安排。
+  - 在实例化 Estimator 时，将该 RunConfig 对象传递给 Estimator 的 config 参数。
 
 ```
 my_checkpointing_config = tf.estimator.RunConfig(
@@ -132,7 +132,7 @@ predict 方法时，都会发生下列情况：
 
 ### 避免不当恢复
 
->通过检查点恢复模型的状态这一操作仅在模型和检查点兼容时可行(当模型重要参数发生变化时，无法检查点恢复)
+- 通过检查点恢复模型的状态这一操作仅在模型和检查点兼容时可行(当模型重要参数发生变化时，无法检查点恢复)
 
 解决方案
 - 要运行实验（训练并比较略微不同的模型版本），请保存一份创建每个 model-dir 所需的代码的副本，同时可能需要为每个版本创建一个单独的 git 
@@ -149,14 +149,14 @@ predict 方法时，都会发生下列情况：
 
 ## 深度神经网络的输入
 
-> 由于深度神经网络各个神经元需要对输入参数进行运算，因此深度神经网络的输入数据必须为数字，但原始很多数据集是类别信息，此时需要对类别信息
+- 由于深度神经网络各个神经元需要对输入参数进行运算，因此深度神经网络的输入数据必须为数字，但原始很多数据集是类别信息，此时需要对类别信息
 进行转换将分类值表示为简单的矢量
 
 ## 特征列
 
-> 特征列在输入数据（由 input_fn 返回）与模型之间架起了桥梁
+- 特征列在输入数据（由 input_fn 返回）与模型之间架起了桥梁
 
-> 要创建特征列，请调用 tf.feature_column 模块的函数。本文档介绍了该模块中的九个函数。如下图所示，所有九个函数都会返回一个 Categorical-Column 
+- 要创建特征列，请调用 tf.feature_column 模块的函数。本文档介绍了该模块中的九个函数。如下图所示，所有九个函数都会返回一个 Categorical-Column 
 或一个 Dense-Column 对象，但却不会返回 bucketized_column，后者继承自这两个类：
 
 ![特征列方法](image/some_constructors.jpg "特征列方法")

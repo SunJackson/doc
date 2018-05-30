@@ -257,11 +257,11 @@ categorical_column_with_vocabulary_list 根据明确的词汇表将每个字符�
 
 并非所有 Estimator 都支持所有类型的 feature_columns 参数：
 
-> - LinearClassifier 和 LinearRegressor：接受所有类型的特征列。
-> - DNNClassifier 和 DNNRegressor：只接受密集列。其他类型的列必须封装在 indicator_column 或 embedding_column 中。
-> - DNNLinearCombinedClassifier 和 DNNLinearCombinedRegressor：
->> - linear_feature_columns 参数接受任何特征列类型。
->> - dnn_feature_columns 参数只接受密集列。
+- LinearClassifier 和 LinearRegressor：接受所有类型的特征列。
+- DNNClassifier 和 DNNRegressor：只接受密集列。其他类型的列必须封装在 indicator_column 或 embedding_column 中。
+- DNNLinearCombinedClassifier 和 DNNLinearCombinedRegressor：
+    - linear_feature_columns 参数接受任何特征列类型。
+    - dnn_feature_columns 参数只接受密集列。
 
 
 

@@ -13,7 +13,7 @@
 
 Estimator
 ==
-###创建一个或多个输入函数
+### 创建一个或多个输入函数
 ```
 创建输入函数来提供用于训练、评估和预测的数据
     输入函数是返回 tf.data.Dataset 对象的函数（可以以任何方式生成建议使用 TensorFlow 的 Dataset API，它可以解析各种数据）
@@ -23,7 +23,7 @@ Estimator
             每个值都是包含此特征所有值的数组。
         label - 包含每个样本的标签值的数组。
 ```
-####简单的实现
+#### 简单的实现
 ```
 def input_evaluation_set():
     features = {'SepalLength': np.array([6.4, 5.0]),
@@ -34,7 +34,7 @@ def input_evaluation_set():
     return features, labels
 ```
 
-###定义模型的特征列
+### 定义模型的特征列
 ```
 特征列是一个对象，用于说明模型应该如何使用特征字典中的原始输入数据。在构建 Estimator 模型时，您会向其传递一个特征列
 的列表，其中包含您希望模型使用的每个特征。tf.feature_column 模块提供很多用于向模型表示数据的选项。
@@ -46,7 +46,7 @@ my_feature_columns = []
 for key in train_x.keys():
     my_feature_columns.append(tf.feature_column.numeric_column(key=key))
 ```
-###实例化 Estimator，指定特征列和各种超参数
+### 实例化 Estimator，指定特征列和各种超参数
 
 >TensorFlow 提供了几个预创建的分类器 Estimator
 
@@ -56,7 +56,7 @@ for key in train_x.keys():
 
 > - tf.estimator.LinearClassifier：适用于基于线性模型的分类器。
 
-###训练、评估和预测
+### 训练、评估和预测
 
 - 训练模型。
 - 评估经过训练的模型。
@@ -68,8 +68,8 @@ for key in train_x.keys():
 
 - [SavedModel][4]：这种格式与创建模型的代码无关。
 
-##保存经过部分训练的模型
-###Estimator 自动将以下内容写入磁盘：
+## 保存经过部分训练的模型
+### Estimator 自动将以下内容写入磁盘：
 
 - 检查点：训练期间所创建的模型版本。
 - 事件文件：其中包含 TensorBoard 用于创建可视化图表的信息
@@ -82,13 +82,16 @@ classifier = tf.estimator.DNNClassifier(
     n_classes=3,
     model_dir='models/path')
 ```
-####默认检查点目录    
+
+#### 默认检查点目录
+
 
 >如果您未在 Estimator 的构造函数中指定 model_dir，则 Estimator 会将检查点文件写入由 Python 的 tempfile.mkdtemp 函数选择的临时目录
 中
 
 
-####检查点频率
+#### 检查点频率
+
 >默认情况下，Estimator 按照以下时间安排将检查点保存到 model_dir 中：
 
 - 每 10 分钟（600 秒）写入一个检查点。
@@ -114,7 +117,8 @@ classifier = tf.estimator.DNNClassifier(
     config=my_checkpointing_config)
 ```
 
-###恢复模型
+### 恢复模型
+
 第一次调用 Estimator 的 train 方法时，TensorFlow 会将一个检查点保存到 model_dir 中。随后每次调用 Estimator 的 train、eval 或 predict 方法时，都会发生下列情况：
 
 - Estimator 通过运行 model_fn() 构建模型图。(要详细了解 model_fn()，请参阅创建自定义 Estimator)
@@ -124,7 +128,8 @@ classifier = tf.estimator.DNNClassifier(
 
 ![恢复模型](image/subsequent_calls.png)
 
-###避免不当恢复
+### 避免不当恢复
+
 通过检查点恢复模型的状态这一操作仅在模型和检查点兼容时可行(当模型重要参数发生变化时，无法检查点恢复)
 
 

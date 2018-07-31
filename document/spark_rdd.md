@@ -1,45 +1,78 @@
 # Transformation和Actions
+RDD提供了两种类型的操作：transformation和action,所有的transformation都是采用的懒策略，如果只是将transformation提交是不会执行计算的，计算只有在action被提交的时候才被触发。
 
-## Transformation具体内容
-- map(func) :返回一个新的分布式数据集，由每个原元素经过func函数转换后组成
+## Transformation操作
+得到一个新的RDD，比如从数据源生成一个新的RDD，从RDD生成一个新的RDD
 
-- filter(func) : 返回一个新的数据集，由经过func函数后返回值为true的原元素组成*flatMap(func) : 类似于map，但是每一个输入元素，会被映射为0到多个输出元素（因此，func函数的返回值是一个Seq，而不是单一元素）
+- map(func): 返回一个新的分布式数据集，由每个原元素经过func函数转换后组成
 
-- flatMap(func) : 类似于map，但是每一个输入元素，会被映射为0到多个输出元素（因此，func函数的返回值是一个Seq，而不是单一元素）
+- mapValues： 顾名思义就是输入函数应用于RDD中Kev-Value的Value，原RDD中的Key保持不变，与新的Value一起组成新的RDD中的元素。因此，该函数只适用于元素为KV对的RDD。
 
-- sample(withReplacement, frac, seed) :根据给定的随机种子seed，随机抽样出数量为frac的数据
-union(otherDataset) : 返回一个新的数据集，由原数据集和参数联合而成
+- mapWith：map的另外一个变种，map只需要一个输入函数，而mapWith有两个输入函数。第一个函数是把RDD的partition index（index从0开始）作为输入，输出为新类型A；第二个函数是把二元组(T, A)作为输入（其中T为原RDD中的元素，A为第一个函数的输出），输出类型为U。
 
-- groupByKey([numTasks]) :
-在一个由（K,V）对组成的数据集上调用，返回一个（K，Seq[V])对的数据集。注意：默认情况下，使用8个并行任务进行分组，你可以传入numTask可选参数，根据数据量设置不同数目的Task
+- mapPartitions(func)：和map很像，但是map是每个element，而mapPartitions是每个partition
 
-- reduceByKey(func, [numTasks]) : 在一个（K，V)对的数据集上使用，返回一个（K，V）对的数据集，key相同的值，都被使用指定的reduce函数聚合到一起。和groupbykey类似，任务的个数是可以通过第二个可选参数来配置的。
+- mapPartitionsWithSplit(func): 和mapPartitions很像，但是func作用的是其中一个split上，所以func中应该有index
 
-- join(otherDataset, [numTasks]) :
-在类型为（K,V)和（K,W)类型的数据集上调用，返回一个（K,(V,W))对，每个key中的所有元素都在一起的数据集
+- mapPartitionsWithIndex(func)函数： mapPartitionsWithIndex的func接受两个参数，第一个参数是分区的索引，第二个是一个数据集分区的迭代器。而输出的是一个包含经过该函数转换的迭代器。下面测试中，将分区索引和分区数据一起输出。
 
-- groupWith(otherDataset, [numTasks]) : 在类型为（K,V)和(K,W)类型的数据集上调用，返回一个数据集，组成元素为（K, Seq[V], Seq[W]) Tuples。这个操作在其它框架，称为CoGroup
+- filter(func)：返回一个新的数据集，由经过func函数后返回值为true的原元素组成*flatMap(func): 类似于map，但是每一个输入元素，会被映射为0到多个输出元素（因此，func函数的返回值是一个Seq，而不是单一元素）
 
-- cartesian(otherDataset) : 笛卡尔积。但在数据集T和U上调用时，返回一个(T，U）对的数据集，所有元素交互进行笛卡尔积。
+- flatMap(func): 类似于map，但是每一个输入元素，会被映射为0到多个输出元素（因此，func函数的返回值是一个Seq，而不是单一元素）
 
+- flatMapValues: 类似于mapValues，不同的在于flatMapValues应用于元素为KV对的RDD中Value。每个一元素的Value被输入函数映射为一系列的值，然后这些值再与原RDD中的Key组成一系列新的KV对。
 
-## Actions具体内容
+- flatMapWith: 与mapWith很类似，都是接收两个函数，一个函数把partitionIndex作为输入，输出是一个新类型A；另外一个函数是以二元组（T,A）作为输入，输出为一个序列，这些序列里面的元素组成了新的RDD。
 
-- reduce(func) : 通过函数func聚集数据集中的所有元素。Func函数接受2个参数，返回一个值。这个函数必须是关联性的，确保可以被正确的并发执行
+- sample(withReplacement, frac, seed): 根据给定的随机种子seed，随机抽样出数量为frac的数据
 
-- collect() : 在Driver的程序中，以数组的形式，返回数据集的所有元素。这通常会在使用filter或者其它操作后，返回一个足够小的数据子集再使用，直接将整个RDD集Collect返回，很可能会让Driver程序OOM
+- union(otherDataset): 返回一个新的数据集，由原数据集和参数联合而成
 
-- count() : 返回数据集的元素个数
+- groupByKey([numTasks]): 在一个由（K,V）对组成的数据集上调用，返回一个（K，Seq[V])对的数据集。注意：默认情况下，使用8个并行任务进行分组，你可以传入numTask可选参数，根据数据量设置不同数目的Task
 
-- take(n) : 返回一个数组，由数据集的前n个元素组成。注意，这个操作目前并非在多个节点上，并行执行，而是Driver程序所在机器，单机计算所有的元素(Gateway的内存压力会增大，需要谨慎使用）
+- sortBy(dataSet, boolean)：排序。第二个参数默认为true，即升序排序。
 
-- first() : 返回数据集的第一个元素（类似于take(1)）
+- sortByKey([ascending],[numTasks]): 按照key来进行排序，是升序还是降序，ascending是boolean类型
 
-- saveAsTextFile(path) : 将数据集的元素，以textfile的形式，保存到本地文件系统，hdfs或者任何其它hadoop支持的文件系统。Spark将会调用每个元素的toString方法，并将它转换为文件中的一行文本
+- reduceByKey(func, [numTasks]): 在一个（K，V)对的数据集上使用，返回一个（K，V）对的数据集，key相同的值，都被使用指定的reduce函数聚合到一起。和groupbykey类似，任务的个数是可以通过第二个可选参数来配置的。
 
-- saveAsSequenceFile(path) : 将数据集的元素，以sequencefile的格式，保存到指定的目录下，本地系统，hdfs或者任何其它hadoop支持的文件系统。RDD的元素必须由key-value对组成，并都实现了Hadoop的Writable接口，或隐式可以转换为Writable（Spark包括了基本类型的转换，例如Int，Double，String等等）
+- join(otherDataset, [numTasks]): 在类型为（K,V)和（K,W)类型的数据集上调用，返回一个（K,(V,W))对，每个key中的所有元素都在一起的数据集
 
-- foreach(func) : 在数据集的每一个元素上，运行函数func。这通常用于更新一个累加器变量，或者和外部存储系统做交互
+- groupWith(otherDataset, [numTasks]): 在类型为（K,V)和(K,W)类型的数据集上调用，返回一个数据集，组成元素为（K, Seq[V], Seq[W]) Tuples。这个操作在其它框架，称为CoGroup
+
+- cartesian(otherDataset): 笛卡尔积。但在数据集T和U上调用时，返回一个(T，U）对的数据集，所有元素交互进行笛卡尔积。
+
+- coalesce(numPartitions, true)： 对RDD中的分区重新进行合并。返回一个新的RDD，且该RDD的分区个数等于numPartitions个数。如果shuffle设置为true，则会进行shuffle。
+
+- repartition(numPartitions): 随机重新shuffle RDD中的数据，并创建numPartitions个分区。此操作总会通过网络来shuffle全部数据
+
+- pipe(command, [envVars]): 通过POSIX 管道来将每个RDD分区的数据传入一个shell命令（例如Perl或bash脚本）。RDD元素会写入到进程的标准输入，其标准输出会作为RDD字符串返回。
+
+## Actions操作
+
+action是得到一个值，或者一个结果（直接将RDD cache到内存中）
+
+- reduce(func): 通过函数func聚集数据集中的所有元素。Func函数接受2个参数，返回一个值。这个函数必须是关联性的，确保可以被正确的并发执行
+
+- collect(): 在Driver的程序中，以数组的形式，返回数据集的所有元素。这通常会在使用filter或者其它操作后，返回一个足够小的数据子集再使用，直接将整个RDD集Collect返回，很可能会让Driver程序OOM
+
+- count(): 返回数据集的元素个数
+
+- take(n): 返回一个数组，由数据集的前n个元素组成。注意，这个操作目前并非在多个节点上，并行执行，而是Driver程序所在机器，单机计算所有的元素(Gateway的内存压力会增大，需要谨慎使用）
+
+- takeOrdered(n, [ordering]): 返回一个由数据集的前n个元素组成的有序数组，使用自然序或自定义的比较器。
+
+- first(): 返回数据集的第一个元素（类似于take(1)）
+
+- saveAsTextFile(path): 将数据集的元素，以textfile的形式，保存到本地文件系统，hdfs或者任何其它hadoop支持的文件系统。Spark将会调用每个元素的toString方法，并将它转换为文件中的一行文本
+
+- saveAsSequenceFile(path): 将数据集的元素，以Hadoop sequencefile的格式，保存到指定的目录下，本地系统，HDFS或者任何其它hadoop支持的文件系统。这个只限于由key-value对组成，并实现了Hadoop的Writable接口，或者隐式的可以转换为Writable的RDD。（Spark包括了基本类型的转换，例如Int，Double，String，等等）
+
+- saveAsObjectFile(path): 将数据集元素写入Java序列化的可以被SparkContext.objectFile()加载的简单格式中
+
+- countByKey(): 返回的是key对应的个数的一个map，作用于一个RDD
+
+- foreach(func): 在数据集的每一个元素上，运行函数func。这通常用于更新一个累加器变量，或者和外部存储系统做交互
 
 
 ## 算子分类
@@ -230,6 +263,5 @@ Transformation处理的数据为Key-Value形式的算子大致可以分为：
 
 - aggregate
 
-    aggregate先对每个分区的所有元素进行aggregate操作，再对分区的结果进行fold操作。 
-
+    aggregate先对每个分区的所有元素进行aggregate操作，再对分区的结果进行fold操作。   
     aggreagate与fold和reduce的不同之处在于，aggregate相当于采用归并的方式进行数据聚集，这种聚集是并行化的。 而在fold和reduce函数的运算过程中，每个分区中需要进行串行处理，每个分区串行计算完结果，结果再按之前的方式进行聚集，并返回最终聚集结果。 

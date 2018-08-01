@@ -17,8 +17,7 @@ def make_trie(words):
         t[END] = {}
     return trie
 
-words = ['hello', 'hela', 'dome']
-t = make_trie(words)
+
 # 容错查找
 # 实质上是对Trie的深度优先搜索,每一步加深时就消耗目标词的一个字母
 # 当搜索到达某个结点时,分为不消耗容错数和消耗容错数的的情形,继续搜索知道目标词为空。

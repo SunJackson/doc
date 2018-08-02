@@ -2,7 +2,7 @@
 # 比如输入hello, 却错误的输入了hellu, 找出出错的字母
 # 感谢知乎知友@Lee Shellay
 
-# 对词典中的每个词, 逐刺逐字母拓展Trie, 单词完结处结点用END符号标识
+# 对词典中的每个词,逐词逐字母拓展Trie, 单词完结处结点用END符号标识
 END = '$'
 
 
@@ -28,10 +28,10 @@ def check_fuzzy(trie, word, path='', tol=1):  # tol为容错数
         return [path] if END in trie else []
     else:
         p0 = []
+        p1 = []
         if word[0] in trie:
             p0 = check_fuzzy(trie[word[0]], word[1:], path + word[0], tol)
-        p1 = []
-        if tol > 0:
+        elif tol > 0:
             for k in trie:
                 if k != word[0]:
                     p1.extend(check_fuzzy(trie[k], word[1:], path + k, tol - 1))
@@ -43,4 +43,4 @@ words = ['hello', 'hela', 'dome']
 t = make_trie(words)
 print(t)
 # print(check_fuzzy(t, 'hellu'))
-# print(check_fuzzy(t, 'healu', tol=2))
+print(check_fuzzy(t, 'healu', tol=2))

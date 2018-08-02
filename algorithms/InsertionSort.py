@@ -5,6 +5,7 @@ def insertionSort(alist):
             alist[index] = alist[index-1]
             index -= 1
         alist[index] = item
+        print(alist)
     return alist
 
 alist = [54,26,93,17,77,31,44,55,20]

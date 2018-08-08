@@ -45,12 +45,18 @@ Logistic本质上是一个基于条件概率的判别模型(DiscriminativeModel)
 - 优化方法：
     - 梯度下降
     - 牛顿法
-- LR 为什么用 sigmoid 函数？这个函数有什么优点和缺点？为什么不用其他函数？
+- LR 为什么用 sigmoid 函数？这个函数有什么优点和缺点？为什么不用其他函数？[参考这里](https://ask.julyedu.com/question/85100)
 
 2）模型对比
 
-- LR 和线性回归区别？线性回归可以用来做正负分类么？
+- LR ？线性回归可以用来做正负分类么？
 - LR 和 SVM 区别？
+    - 本质上其loss function不同
+    - 支持向量机只考虑局部的边界线附近的点，而逻辑回归考虑全局（远离的点对边界线的确定也起作用）
+    - 在解决非线性问题时，支持向量机采用核函数的机制，而LR通常不采用核函数的方法
+    - ​线性SVM依赖数据表达的距离测度，所以需要对数据先做normalization，LR不受其影响
+    - SVM的损失函数就自带正则！！！（损失函数中的1/2||w||^2项），这就是为什么SVM是结构风险最小化算法的原因！！！而LR必须另外在损失函数上添加正则项！！！
+    
 - LR 和最大熵模型的关系？
 	
 3）模型实现
@@ -98,7 +104,7 @@ Logistic本质上是一个基于条件概率的判别模型(DiscriminativeModel)
 - boosting
     - Adaboost
     
-    - GBDT
+    - [GBDT](https://blog.csdn.net/w28971023/article/details/8240756)
         - GBDT
             - GBDT 原理？加法模型
             - GBDT 分裂节点的选择？

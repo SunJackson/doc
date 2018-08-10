@@ -79,7 +79,7 @@ Logistic本质上是一个基于条件概率的判别模型(DiscriminativeModel)
     - 合页损失函数是针对原始问题还是对偶问题？
     
 - 优化方法：
-    - SMO
+    - [SMO 序列最小化优化](https://www.zhihu.com/question/40546280)
     - SMO 算法的时间复杂度和空间复杂度？
     
 - SVM 怎么防止过拟合

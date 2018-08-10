@@ -1,3 +1,18 @@
+---
+layout:     post
+title:      GBM
+subtitle:   深度学习，GBM
+date:       2018-08-10
+author:     SunJackson
+category:   深度学习
+catalog: true
+tags:
+    - 深度学习
+    - Deep Learning
+    - GBM
+---
+
+
 # GBM(gradient boosting machine)
 
 ## 参数详解:

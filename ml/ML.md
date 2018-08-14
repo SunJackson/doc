@@ -105,7 +105,23 @@ Logistic本质上是一个基于条件概率的判别模型(DiscriminativeModel)
     
 - 决策树怎么处理连续值？
 
-2）集成学习
+2) 分类树和回归树的区别
+- 分类树
+    - 分类树使用信息增益或增益比率来划分节点；每个节点样本的类别情况投票决定测试样本的类别。
+    
+- 回归树
+    - 回归树使用最大均方差划分节点；每个节点样本的均值作为测试样本的回归预测值。
+
+![回归树生成算法](https://upload-images.jianshu.io/upload_images/967544-b768a350d5383ccb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700)
+
+3）集成学习
+
+三种主要方法：
+- Boosting:分步迭代
+- bagging
+- stacking
+
+
 
 - bagging：随机森林
     - 随机森林怎么防止过拟合？
@@ -114,11 +130,12 @@ Logistic本质上是一个基于条件概率的判别模型(DiscriminativeModel)
     - Adaboost
     
     - [GBDT](https://blog.csdn.net/w28971023/article/details/8240756)
-        - GBDT
+        - GBDT: 是由K棵树组成的加法模型
             - GBDT 原理？加法模型
             - GBDT 分裂节点的选择？
             - GBDT 怎么并发？
             - GBDT 为什么用梯度拟合残差？
+            - GBDT 怎么增加泛化能力？
             
         - XGBoost
             - XGBoost 目标函数？

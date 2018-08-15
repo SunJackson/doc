@@ -15,7 +15,7 @@ class Solution:
         for i in range(len(s), 0, -1):
             j = 0
             while i + j < s_len:
-                if self.isPalindrome(s, j, i + j+1):
+                if self.isPalindrome(s, j, i + j + 1):
                     return s[j:i + j+1]
                 j += 1
         return s[0:1]
@@ -78,6 +78,6 @@ class Solution:
 
 
 if __name__ == '__main__':
-    s = "ac"
+    s = "acacdad"
     solu = Solution()
-    print(solu.longestPalindrome(s))
+    print(solu.longestPalindrome_my(s))

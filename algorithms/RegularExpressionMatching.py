@@ -5,21 +5,29 @@ class Solution:
         :type p: str
         :rtype: bool
         """
-        p_index = 0
-        s_index = 0
-        if s == p:
-            return True
-        if s == '' or p == '':
-            return False
+        memo = {}
 
-        for index in range(len(s)):
-            print(s[index])
-            if s[index] == p[index]:
+        def dp(i, j):
+
+            if (i, j) not in memo:
+                if j == len(p):
+                    ans = i == len(s)
+                else:
+                    print(s[i], p[j])
+                    first_match = i < len(s) and p[j] in {s[i], '.'}
+                    if j + 1 < len(p) and p[j + 1] == '*':
+                        ans = dp(i, j + 2) or first_match and dp(i + 1, j)
+                    else:
+                        ans = first_match and dp(i + 1, j + 1)
+                memo[i, j] = ans
+            return memo[i, j]
+
+        return dp(0, 0)
 
 
 if __name__ == '__main__':
-    s = "mississippi"
-    p = "mis*is*p*."
+    s = "aaaaaa"
+    p = "a*a"
     # s = ''
     # p = ''
     solu = Solution()

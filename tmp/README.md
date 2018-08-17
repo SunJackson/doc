@@ -14,17 +14,17 @@
 
 新房爬虫获取到数据之后，发送给Kafka，Spark 从mysql获取kafka 的 offset 值， 对kafka请求数据，经过 Spark 脚本处理添加UUID后存入数据库，同时保存新的 offset 偏移量。
 
-![顶层设计](https://github.com/SunJackson/doc/blob/master/tmp/image/spark-kafka.png)
+![顶层设计](https://imgchr.com/i/PWMNmq)
 
 ### 算法设计
 
 对于每一张表案例数据的Spark处理流程基本一致，如下图：
 
-![算法设计](https://github.com/SunJackson/doc/blob/master/tmp/image/doudongsuanfa.png)
+![算法设计](https://imgchr.com/i/PWMa7V)
 
 对字段的具体操作流程如下图：
 
-![算法流程](https://github.com/SunJackson/doc/blob/master/tmp/image/suanfaliucheng.png)
+![算法流程](https://imgchr.com/i/PWMwkT)
 
 # 部署
 

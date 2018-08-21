@@ -54,7 +54,7 @@ if __name__ == '__main__':
     import time
 
     nums = [1, 3]
-    target = 5
+    target = 3
     start_time = time.time()
     solu = Solution()
     print(solu.search(nums, target))

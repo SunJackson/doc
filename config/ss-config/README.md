@@ -21,11 +21,26 @@ Shadowsocks的systemd服务可在/etc/shadowsocks/里调用不同的conf-file.js
 配置终端走代理
 ----
 
-```angular2html
+```
 sudo vim .zshrc
 
 添加：
 alias setproxy="export ALL_PROXY=socks5://127.0.0.1:1080"
 alias unsetproxy="unset ALL_PROXY"
 alias ip="curl -i http://ip.cn"
+```
+
+CentOS安装python3
+--
+```
+wget https://www.moerats.com/usr/shell/Python3/CentOS_Python3.6.sh && sudo sh CentOS_Python3.6.sh
+sudo ln -s /usr/local/bin/python3 /usr/bin/python3
+sudo ln -s /usr/local/bin/pip3 /usr/bin/pip3
+```
+
+CentOS安装libsodium
+--
+```
+yum install http://springdale.math.ias.edu/data/puias/computational/7/x86_64//libsodium-1.0.5-1.sdl7.x86_64.rpm
+
 ```

@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=simple
 User=sun
-ExecStart=/usr/bin/sslocal -c /etc/shadowsocks.json
+ExecStart=/usr/bin/ssserver -c /etc/shadowsocks.json
 
 [Install]
 WantedBy=multi-user.target

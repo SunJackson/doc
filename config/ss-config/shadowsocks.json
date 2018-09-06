@@ -1,10 +1,12 @@
 {
-    "server":"172.96.253.199",
-    "server_port":,
+    "server":"*******",
     "local_address": "127.0.0.1",
     "local_port":1080,
-    "password":"",
+    "port_password": {
+        "27456": "*******",
+        "27457": "********"
+        },
     "timeout":300,
     "method":"salsa20",
-    "fast_open": false
+    "fast_open": true
 }

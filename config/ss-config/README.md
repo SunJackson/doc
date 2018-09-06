@@ -3,7 +3,7 @@ shadowsocks 配置
 配置
 ------
 ```
-pip install shadowsocks, salsa20 -i https://pypi.douban.com/simple
+pip install shadowsocks salsa20 -i https://pypi.douban.com/simple
 sudo cp ./shadowsocks.service /etc/systemd/system/shadowsocks.service
 sudo systemctl enable shadowsocks
 sudo systemctl start shadowsocks
@@ -33,9 +33,7 @@ alias ip="curl -i http://ip.cn"
 CentOS安装python3
 --
 ```
-wget https://www.moerats.com/usr/shell/Python3/CentOS_Python3.6.sh && sudo sh CentOS_Python3.6.sh
-sudo ln -s /usr/local/bin/python3 /usr/bin/python3
-sudo ln -s /usr/local/bin/pip3 /usr/bin/pip3
+wget https://www.moerats.com/usr/shell/Python3/CentOS_Python3.6.sh && sudo sh CentOS_Python3.6.sh && sudo ln -s /usr/local/bin/python3 /usr/bin/python3 && sudo ln -s /usr/local/bin/pip3 /usr/bin/pip3
 ```
 
 CentOS安装libsodium

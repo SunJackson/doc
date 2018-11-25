@@ -33,6 +33,8 @@ alias ip="curl -i http://ip.cn"
 CentOS安装python3
 --
 ```
+yum install python-devel
+
 wget https://www.moerats.com/usr/shell/Python3/CentOS_Python3.6.sh && sudo sh CentOS_Python3.6.sh && sudo ln -s /usr/local/bin/python3 /usr/bin/python3 && sudo ln -s /usr/local/bin/pip3 /usr/bin/pip3
 ```
 

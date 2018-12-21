@@ -5,7 +5,7 @@ manjaro
 -------
 #安装fcitx
 ```
-yaourt fcitx`
+yaourt fcitx
 sudo pacman -S fcitx-configtool fcitx-im fcitx-libpinyin
 vi /etc/environment
 sudo vi /etc/environment

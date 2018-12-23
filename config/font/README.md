@@ -7,8 +7,7 @@ manjaro
 ```
 yaourt fcitx
 sudo pacman -S fcitx-configtool fcitx-im fcitx-libpinyin
-vi /etc/environment
-sudo vi /etc/environment
+sudo vim /etc/environment
 ```
 #添加
 ```

@@ -4,10 +4,11 @@
 manjaro
 -------
 #安装fcitx
-`yaourt fcitx`
-`sudo pacman -S fcitx-configtool, fcitx-im, fcitx-libpinyin`
-`vi /etc/environment`
-`sudo vi /etc/environment`
+```
+yaourt fcitx
+sudo pacman -S fcitx-configtool fcitx-im fcitx-libpinyin
+sudo vim /etc/environment
+```
 #添加
 ```
 export GTK_IM_MODULE=fcitx

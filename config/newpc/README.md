@@ -5,11 +5,7 @@
 ----------
 
 ```
-wget
-curl
-git
-gcc
-cmake
+wget curl git gcc cmake zsh
 ```
 
 网易云音乐

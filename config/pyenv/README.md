@@ -24,6 +24,6 @@ echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshenv &&
 exec "$SHELL" &&
 zsh &&
 pyenv versions &&
-pyenv virtualenv 3.6.5 venv-3.6.5 &&
+pyenv virtualenv 3.6.5 venv-3.6.5 
 
 ```

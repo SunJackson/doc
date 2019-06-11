@@ -89,7 +89,7 @@ http {
     #gzip  on;
 server {
   listen       80;
-  server_name www.yuleonstar.com yuleonstar.com;
+  server_name www.[domain].com [domain].com;
   location ^~ /.well-known/acme-challenge/ {
     #存放验证文件的目录，需自行更改为对应目录
     alias /root/ssl/data/challenges/;

@@ -18,7 +18,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'google/yapf'
 Plug 'fisadev/vim-isort'
 Plug 'morhetz/gruvbox'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go' 
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'}

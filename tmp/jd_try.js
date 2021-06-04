@@ -7,6 +7,7 @@ const selfdomain = 'https://try.m.jd.com'
 let allGoodList = []
 
 let $ = new Env('京东试用');
+let that = $;
 // default params
 $.pageSize = 12
 let cidsList = ["家用电器", "手机数码", "电脑办公", "家居家装"]

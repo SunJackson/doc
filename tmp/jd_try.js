@@ -8,12 +8,13 @@ let allGoodList = []
 
 let $ = new Env('京东试用');
 let that = $;
+
 // default params
 $.pageSize = 12
-let cidsList = ["家用电器", "手机数码", "电脑办公", "家居家装"]
+let cidsList = ["家用电器", "手机数码", "电脑办公", "家居家装","生鲜美食","钟表奢品","个人护理","食品饮料","家庭清洁"]
 let typeList = ["普通试用", "闪电试用"]
 let goodFilters = "教程@软件@英语@辅导@培训@手机卡".split('@')
-let minPrice = 0
+let minPrice = 100
 
 const cidsMap = {
 	"全部商品": "0",
